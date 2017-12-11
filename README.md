@@ -1,0 +1,1 @@
+clone repo, install the requirements in a virtual env. Make an oauth app [here](https://marvelapp.com/oauth/applications/), and put those credentials in your env or app.py (see top of app.py). Run with `python app.py`
