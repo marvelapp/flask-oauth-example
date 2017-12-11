@@ -45,19 +45,22 @@ def redirect_handler():
     }
 
     # now we can make API requests using this token in the headers
-    response = requests.post('https://marvelapp.com/oauth', data='''
-        query {
-            user {
-                email
+    response = requests.post('https://marvelapp.com/graphql', json={
+        'query': '''
+            query {
+                user {
+                    email
+                }
             }
-        }
-    ''', headers=headers)
+        '''
+    }, headers=headers)
 
     assert response.ok, 'Request to graphql API failed'
-    email = ''
+
+    email = response.json()['data']['user']['email']
     return '''
         <html>
-        <b>%s</b> has authorised their Marvel account
+        %s has authorised their Marvel account
         Their access token is %s
         </html>
     ''' % (email, token)
