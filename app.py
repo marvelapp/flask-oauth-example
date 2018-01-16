@@ -7,13 +7,14 @@ import requests
 
 app = Flask(__name__)
 
+API_BASE = os.environ.get('API_BASE', 'https://marvelapp.com')
 CLIENT_ID = os.environ.get('CLIENT_ID')
 CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
 REDIRECT_URI = os.environ.get('REDIRECT_URI')
 
 @app.route('/')
 def index():
-    connect_url = 'https://marvelapp.com/oauth/authorize/?' + urlencode({
+    connect_url = API_BASE + '/oauth/authorize/?' + urlencode({
         'state': uuid4().hex,
         'client_id': CLIENT_ID,
         'response_type': 'code',
@@ -29,7 +30,7 @@ def redirect_handler():
     # using the code we've just been given, make a request to obtain
     # an access token for this user
     code = request.args.get('code')
-    response = requests.post('https://marvelapp.com/oauth/token/', data={
+    response = requests.post(API_BASE + '/oauth/token/', data={
         'grant_type': 'authorization_code',
         'code': code,
         'client_id': CLIENT_ID,
@@ -45,7 +46,7 @@ def redirect_handler():
     }
 
     # now we can make API requests using this token in the headers
-    response = requests.post('https://marvelapp.com/graphql', json={
+    response = requests.post(API_BASE + '/graphql', json={
         'query': '''
             query {
                 user {
