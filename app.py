@@ -19,6 +19,7 @@ def index():
         'client_id': CLIENT_ID,
         'response_type': 'code',
         'scope': 'user:read',
+        'redirect_uri': REDIRECT_URI,
     })
     return '<html><a href=%s>Connect with Marvel</a></html>' % connect_url
 
