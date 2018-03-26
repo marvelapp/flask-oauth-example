@@ -38,7 +38,7 @@ def redirect_handler():
         'client_secret': CLIENT_SECRET,
         'redirect_uri': REDIRECT_URI,
     })
-    assert response.ok, 'Token request failed'
+    assert response.ok, 'Token request failed: %s' % response.content
 
     data = response.json()
     token = data['access_token']
