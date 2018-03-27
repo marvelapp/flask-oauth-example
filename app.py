@@ -25,6 +25,8 @@ def index():
 
 @app.route('/redirect')
 def redirect_handler():
+    assert 'error' not in request.args, request.args
+
     # in the real world we should validate that `state` matches the state we set before redirecting the user
     state = request.args.get('state')
 
