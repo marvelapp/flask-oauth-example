@@ -7,7 +7,7 @@ import requests
 
 app = Flask(__name__)
 
-API_BASE = os.environ.get('API_BASE', 'https://marvelapp.com')
+API_BASE = os.environ.get('API_BASE', 'https://api.marvelapp.com')
 CLIENT_ID = os.environ.get('CLIENT_ID')
 CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
 REDIRECT_URI = os.environ.get('REDIRECT_URI')
